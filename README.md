@@ -10,6 +10,16 @@ A simple, pink-themed expense tracking web application built with Python and Fla
 - **Category-wise summary:** Check spending totals for each category.
 - **Pink-themed interface:** A clean, responsive dashboard built with HTML and CSS.
 
+
+## Dashboard Preview
+
+![Expense Tracker dashboard](screenshots/dashboard.png)
+
+### Category-wise Expense Summary
+
+![Category-wise expense breakdown](screenshots/category-summary.png)
+
+
 ## Tech Stack
 
 - Python
