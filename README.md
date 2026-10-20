@@ -13,11 +13,11 @@ A simple, pink-themed expense tracking web application built with Python and Fla
 
 ## Dashboard Preview
 
-![Expense Tracker dashboard](screenshots/dashboard.png)
+![Expense Tracker dashboard](screenshots/dashboard_website.png)
 
 ### Category-wise Expense Summary
 
-![Category-wise expense breakdown](screenshots/category-summary.png)
+![Category-wise expense breakdown](screenshots/category_summary.png)
 
 
 ## Tech Stack
