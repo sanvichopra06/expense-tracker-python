@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker | Python Project</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <main class="container">
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">PERSONAL FINANCE</p>
+                <h1>Expense Tracker</h1>
+                <p class="subtitle">
+                    Track your money, one expense at a time.
+                </p>
+            </div>
+            <div class="header-icon">₹</div>
+        </header>
+
+        <!-- Summary Cards -->
+        <section class="summary-grid">
+            <div class="summary-card total-card">
+                <p class="summary-label">Total Spending</p>
+                <h2>₹{{ total }}</h2>
+                <p class="summary-note">Your recorded expenses</p>
+            </div>
+
+            <div class="summary-card category-card">
+                <p class="summary-label">Categories</p>
+                <h2>{{ cat_expenses|length }}</h2>
+                <p class="summary-note">Categories you've spent in</p>
+            </div>
+        </section>
+
+        <!-- Main Dashboard -->
+        <section class="dashboard-grid">
+
+            <!-- Add Expense Form -->
+            <div class="panel form-panel">
+                <div class="section-heading">
+                    <div>
+                        <h3>Add an Expense</h3>
+                        <p>Enter the details below.</p>
+                    </div>
+                    <span class="heading-icon">+</span>
+                </div>
+
+                <form method="POST" action="/">
+                    <label for="amount">Amount (₹)</label>
+                    <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="e.g. 250"
+                        required
+                    >
+
+                    <label for="category">Category</label>
+                    <input
+                        type="text"
+                        id="category"
+                        name="category"
+                        placeholder="e.g. Food, Travel"
+                        required
+                    >
+
+                    <label for="description">Description</label>
+                    <input
+                        type="text"
+                        id="description"
+                        name="description"
+                        placeholder="What did you spend on?"
+                        required
+                    >
+
+                    <button type="submit">+ Add Expense</button>
+                </form>
+            </div>
+
+            <!-- Expense History -->
+            <div class="panel expenses-panel">
+                <div class="section-heading">
+                    <div>
+                        <h3>Your Expenses</h3>
+                        <p>A record of your spending.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Amount</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for expense in expenses %}
+                            <tr>
+                                <td class="amount-cell">
+                                    ₹{{ expense.amount }}
+                                </td>
+                                <td>
+                                    <span class="category-tag">
+                                        {{ expense.category }}
+                                    </span>
+                                </td>
+                                <td>{{ expense.description }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="empty-state">
+                                    No expenses yet. Add your first one!
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Category Summary -->
+        <section class="panel category-panel">
+            <div class="section-heading">
+                <div>
+                    <h3>Category-wise Expenses</h3>
+                    <p>See where your money is going.</p>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Total Spent</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for category, amount in cat_expenses.items() %}
+                        <tr>
+                            <td>{{ category }}</td>
+                            <td class="amount-cell">₹{{ amount }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="2" class="empty-state">
+                                Your category summary will appear here.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            Made with Python and Flask
+        </footer>
+
+    </main>
+</body>
+</html>
